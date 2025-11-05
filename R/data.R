@@ -46,3 +46,22 @@
 #' plot(nitrate_sample_distribution)
 "nitrate_sample_distribution"
 
+#' NEON Monthly Nitrate Summary
+#'
+#' @description
+#' Monthly summary statistics for nitrate values by year and month.
+#'
+#' @format A data frame:
+#' \describe{
+#'   \item{year}{Year}
+#'   \item{month}{Month}
+#'   \item{mean_nitrate}{Mean concentration}
+#'   \item{min_nitrate}{Minimum concentration}
+#'   \item{max_nitrate}{Maximum concentration}
+#'   \item{n}{Sample count}
+#' }
+#'
+#' @examples
+#' data(strata_summary)
+#' plot(strata_summary$mean_nitrate ~ interaction(strata_summary$year, strata_summary$month))
+"strata_summary"
