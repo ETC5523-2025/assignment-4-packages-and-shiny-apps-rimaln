@@ -143,7 +143,7 @@ names)</p>
 <p>Complete time series with measurement detail:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">neon_nitrate</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 10</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 12</span></span></span>
 <span><span class="co">#&gt;   start_date_time     end_date_time       surf_water_nitrate_mean</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2020-03-01 <span style="color: #949494;">00:00:00</span> 2020-03-01 <span style="color: #949494;">00:15:00</span>                     9.6</span></span>
@@ -152,10 +152,11 @@ names)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020-03-01 <span style="color: #949494;">00:45:00</span> 2020-03-01 <span style="color: #949494;">01:00:00</span>                     9.6</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2020-03-01 <span style="color: #949494;">01:00:00</span> 2020-03-01 <span style="color: #949494;">01:15:00</span>                     9.6</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2020-03-01 <span style="color: #949494;">01:15:00</span> 2020-03-01 <span style="color: #949494;">01:30:00</span>                     9.6</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: surf_water_nitrate_minimum &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: surf_water_nitrate_minimum &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   surf_water_nitrate_maximum &lt;dbl&gt;, surf_water_nitrate_variance &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   surf_water_nitrate_num_pts &lt;dbl&gt;, surf_water_nitrate_exp_uncert &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   surf_water_nitrate_std_er_mean &lt;dbl&gt;, final_qf &lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   surf_water_nitrate_std_er_mean &lt;dbl&gt;, final_qf &lt;dbl&gt;, month &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   year &lt;dbl&gt;</span></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nitrate_sample_distribution</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
 <span><span class="co">#&gt;   surf_water_nitrate_mean     n</span></span>
