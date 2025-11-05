@@ -113,8 +113,19 @@ ui <- dashboardPage(
               solidHeader = TRUE,
               collapsible = TRUE,
               width = 12,
-              HTML("<p>This dataset contains surface water nitrate measurements from the NEON project.</p>
-                    <p>Data collected at 15-minute intervals with associated quality flags and measurement statistics.</p>")
+              HTML("
+    <p>This dataset contains surface water nitrate measurements from the NEON project.<br>
+    Data collected at 15-minute intervals with associated quality flags and statistics.</p>
+    <b>How to interpret the dashboard outputs:</b>
+    <ul>
+      <li><b>Value boxes:</b> Show summary statistics including total, mean, and maximum nitrate concentrations. High values may signal possible water contamination.</li>
+      <li><b>Sample Distribution:</b> Visualizes the frequency of each observed nitrate concentration. Look for clusters or outliers and overall spread.</li>
+      <li><b>Data Summary/Table:</b> Provides detailed statistics like minimum, maximum, mean, and quartiles. Use these to understand data range and variability.</li>
+      <li><b>Filters:</b> Change the month or year for analysis--use these to spot patterns, seasonal cycles, or anomalies.</li>
+      <li><b>Boxplots and Stratified Tables:</b> Compare nitrate readings by grouping (month/year). Wide boxes or high whiskers indicate more extreme values or variability.</li>
+    </ul>
+    <p>Use filters and interactive plots/tabs to drill down by time or location, compare trends, and identify critical periods or risks in surface water nitrate.</p>
+  ")
             )
           ),
           column(
