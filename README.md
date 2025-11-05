@@ -5,49 +5,138 @@
 
 <!-- badges: start -->
 
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
-The goal of neonNitrate is to …
+## Overview
+
+The **neonNitrate** package provides an interactive dashboard and tools
+for exploring **nitrate concentration** and related **water-quality
+variables** in freshwater ecosystems.  
+It uses open-access data from the **National Ecological Observatory
+Network (NEON)**, focusing on nitrate dynamics across U.S. monitoring
+sites.
+
+Developed for **ETC5523 – Communicating With Data (Assignment 4)** at
+**Monash University**.
+
+**📊 Package Website:**
+[neonNitrate](https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-rimaln/)
+
+------------------------------------------------------------------------
+
+## Features
+
+- 💧 **Cleaned NEON nitrate dataset**  
+- 🌎 **Interactive Shiny dashboard** for visualization  
+- 📈 **Time-series and correlation plots** for nitrate and temperature  
+- 🧮 **Summary statistics** by site and time  
+- 📝 **Vignettes and documentation** using `roxygen2`
+
+------------------------------------------------------------------------
 
 ## Installation
 
-You can install the development version of neonNitrate from
-[GitHub](https://github.com/) with:
+Install the development version from GitHub:
 
 ``` r
-# install.packages("pak")
-pak::pak("ETC5523-2025/assignment-4-packages-and-shiny-apps-rimaln")
+install.packages("remotes")
+remotes::install_github("ETC5523-2025/assignment-4-packages-and-shiny-apps-rimaln")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Quick Start
 
 ``` r
 library(neonNitrate)
-library(shiny)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## View the dataset
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+data(nitrate_clean)
+head(nitrate_clean)
+summary(nitrate_clean$nitrate_mgL)
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+### Launch interactive dashboard
 
-You can also embed plots, for example:
+``` r
+run_app()
+```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+### Description
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+| Variable        | Description               | Units    |
+|-----------------|---------------------------|----------|
+| `datetime`      | Timestamp of measurement  | ISO 8601 |
+| `siteID`        | NEON site code            | —        |
+| `nitrate_mgL`   | Nitrate concentration     | mg/L     |
+| `temperature_C` | Surface water temperature | °C       |
+| `turbidity_NTU` | Turbidity (water clarity) | NTU      |
+
+## Interactive Dashboard
+
+Launch the Shiny dashboard to explore the data interactively:
+
+``` r
+run_app()
+```
+
+The Shiny dashboard includes three key sections: - **Overview** –
+Explore nitrate levels by site and year - **Time-Series Trends** –
+Visualize seasonal nitrate variation - **Variable Correlations** –
+Compare nitrate with turbidity, temperature, and conductivity
+
+## Example Analysis
+
+``` r
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+library(ggplot2)
+
+# Example dataset
+nitrate_clean <- data.frame(
+  siteID = rep("BARC", 12),
+  datetime = seq(as.Date("2020-01-01"), by = "month", length.out = 12),
+  nitrate_mgL = runif(12, 0.5, 3.5)
+)
+
+nitrate_clean |>
+  mutate(month = format(datetime, "%b")) |>
+  group_by(month) |>
+  summarise(mean_nitrate = mean(nitrate_mgL, na.rm = TRUE)) |>
+  ggplot(aes(x = month, y = mean_nitrate)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Average Monthly Nitrate Concentration – BARC Site",
+    x = "Month",
+    y = "Nitrate (mg/L)"
+  ) +
+  theme_minimal()
+```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+
+## Available Datasets
+
+- *nitrate_clean* – Cleaned NEON nitrate dataset
+- *nitrate_summary* – Summarized nitrate data by site and month
+
+## Functions
+
+- **run_app()** - Launch the Shiny dashboard
+- **summarize_nitrate()** - Compute nitrate statistics by time or site
+- **plot_nitrate_trends()** - Generate time-series visualizations
+
+## Documentation
+
+- [**Package
+  Website**](https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-rimaln.git)
