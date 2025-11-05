@@ -40,6 +40,13 @@ strata_summary <- neon_nitrate  |>
   )
 
 # Population estimate (total observation count as surrogate)
-pop_est <- neon_nitrate %>%
+pop_est <- neon_nitrate  |>
   summarise(total_obs = n())
 
+usethis::use_data(
+  neon_nitrate,
+  nitrate_sample_distribution,
+  strata_summary,
+  pop_est,
+  overwrite = TRUE
+)
