@@ -65,3 +65,21 @@
 #' data(strata_summary)
 #' plot(strata_summary$mean_nitrate ~ interaction(strata_summary$year, strata_summary$month))
 "strata_summary"
+
+#' NEON Nitrate Observation Coverage
+#'
+#' @description
+#' Dataset summarizing total number of samples and temporal coverage.
+#'
+#' @format A data frame:
+#' \describe{
+#'   \item{total_obs}{Total number of cleaned observations}
+#'   \item{start_range}{Earliest sample time}
+#'   \item{end_range}{Latest sample time}
+#' }
+#'
+#' @examples
+#' data(pop_est)
+#' pop_est$total_obs
+"pop_est"
+
