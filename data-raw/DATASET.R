@@ -10,16 +10,13 @@ library(purrr)
 csv_files <- list.files("data-raw", pattern = "\\.csv$", full.names = TRUE)
 
 # Bind all NEON nitrate CSVs into one dataframe
-raw <- purrr::map_dfr(csv_files, read_csv)
+nitrate_raw <- purrr::map_dfr(csv_files, read_csv)
 
 # Clean data and create main dataset
-neon_nitrate <- raw |>
+neon_nitrate <- nitrate_raw |>
   filter(!is.na(surfWaterNitrateMean), !is.na(startDateTime)) |>
   janitor::clean_names()
 
-# Write the combined dataset to a CSV file
-write_csv(neon_nitrate, "data-raw/Neon_Nitrate_Combined.csv")
-usethis::use_data(neon_nitrate, overwrite = TRUE)
 
 # Distribution of nitrate measurements
 nitrate_sample_distribution <- neon_nitrate |>
@@ -52,3 +49,7 @@ pop_est <- neon_nitrate |>
   summarise(total_obs = n())
 
 usethis::use_data(pop_est, overwrite = TRUE)
+
+# Write the combined dataset to a CSV file
+write_csv(neon_nitrate, "data-raw/Neon_Nitrate_Combined.csv")
+usethis::use_data(neon_nitrate, overwrite = TRUE)

@@ -58,9 +58,9 @@ library(neonNitrate)
 ## View the dataset
 
 ``` r
-data(nitrate_clean)
-head(nitrate_clean)
-summary(nitrate_clean$nitrate_mgL)
+data(neon_nitrate)
+head(neon_nitrate)
+summary(neon_nitrate$nitrate_mgL)
 ```
 
 ### Launch interactive dashboard
