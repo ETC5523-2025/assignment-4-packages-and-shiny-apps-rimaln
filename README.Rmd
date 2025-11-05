@@ -97,7 +97,7 @@ The Shiny dashboard includes three key sections:
 
 ## Example Analysis
 
-```{r}
+```{r nitrate clean}
 library(dplyr)
 library(ggplot2)
 

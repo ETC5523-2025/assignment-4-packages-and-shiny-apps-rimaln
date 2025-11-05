@@ -127,7 +127,7 @@ nitrate_clean |>
   theme_minimal()
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-nitrate clean-1.png" width="100%" />
 
 ## Available Datasets
 
