@@ -31,7 +31,7 @@ run_app <- function(...) {
     )
   }
 
-  app_dir <- system.file("app", package = "neonNitrate")
+  app_dir <- system.file("shiny", package = "neonNitrate")
   if (app_dir == "") {
     stop(
       "Could not locate Shiny app directory in the neonNitrate package.",

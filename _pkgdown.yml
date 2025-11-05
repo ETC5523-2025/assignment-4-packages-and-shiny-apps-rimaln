@@ -4,8 +4,8 @@ template:
   bootstrap: 5
   bootswatch: superhero
   bslib:
-    primary: "#114B5F"
-    secondary: "#FFB400"
+    primary: "#7FB7D3"
+    secondary: "#FFEC99"
   assets:
     - css/custom.css
 
@@ -62,7 +62,7 @@ articles:
 
 authors:
   Rimlan Lora Alva:
-    href: ""
+    href: https://github.com/rimaln
 
 footer:
   structure:
