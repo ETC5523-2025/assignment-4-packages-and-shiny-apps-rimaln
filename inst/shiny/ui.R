@@ -12,12 +12,11 @@ ui <- dashboardPage(
   dashboardSidebar(
     width = 250,
     selectInput("dataset_select", "Select Dataset:",
-                choices = c(
-                  "Combined (All Sites)" = "combined",
-                  "Site/Dataset 1" = "file1",
-                  "Site/Dataset 2" = "file2",
-                  "Site/Dataset 3" = "file3",
-                  "Site/Dataset 4" = "file4"
+                choices = c("Combined (All Sites)" = "combined",
+                            "Site/Dataset 1" = "file1",
+                            "Site/Dataset 2" = "file2",
+                            "Site/Dataset 3" = "file3",
+                            "Site/Dataset 4" = "file4"
                 ),
                 selected = "combined"
     ),
@@ -25,8 +24,8 @@ ui <- dashboardPage(
     sidebarMenu(
       id = "tabs",
       menuItem("Overview", tabName = "overview", icon = icon("info-circle")),
-      menuItem("Population Estimates", tabName = "estimates", icon = icon("project-diagram")),
-      menuItem("Stratified Analysis", tabName = "stratified", icon = icon("chart-bar"))
+      menuItem("Population Estimates", tabName = "estimates", icon = icon("bar-chart")),
+      menuItem("Stratified Analysis", tabName = "stratified", icon = icon("line-chart"))
     )
   ),
   dashboardBody(
@@ -47,7 +46,6 @@ ui <- dashboardPage(
           border-radius: 10px;
           border: none;
         }
-        /* Add shadow for lifted look */
         .box {
           box-shadow: 0 2px 8px rgba(30,30,60,0.06) !important;
         }
@@ -57,7 +55,6 @@ ui <- dashboardPage(
         .box.box-info {
            background: #e3f2fd;
         }
-        /* Custom valueBox colors and style */
         .small-box.bg-blue {
           background: linear-gradient(120deg, #2491c5 60%, #3989dd 100%);
           color: #fff !important;
@@ -79,7 +76,6 @@ ui <- dashboardPage(
           border-radius: 18px !important;
           border: none !important;
         }
-        /* ValueBox font tweaks */
         .small-box .inner h3 {
           font-size: 2.9em !important;
           font-weight: 900 !important;
@@ -91,17 +87,16 @@ ui <- dashboardPage(
           margin-top: 0.30em;
           color: #f5f5f5 !important;
         }
-        /* Subtle icon watermark effect */
         .small-box i {
-          opacity: 0.13 !important;
-          font-size: 4em !important;
-          right: 15px;
-          top: 15px;
-        }
+        opacity: 0.4 !important;
+        font-size: 1.3em !important;
+        color: #fff !important;
+        right: 10px;
+        top: 10px;
+       }
       "))
     ),
     tabItems(
-      # TAB 1: Overview
       tabItem(
         tabName = "overview",
         fluidRow(
@@ -141,8 +136,6 @@ ui <- dashboardPage(
           )
         )
       ),
-
-      # TAB 2: Population Estimates
       tabItem(
         tabName = "estimates",
         fluidRow(
@@ -182,8 +175,6 @@ ui <- dashboardPage(
           )
         )
       ),
-
-      # TAB 3: Stratified Analysis
       tabItem(
         tabName = "stratified",
         fluidRow(

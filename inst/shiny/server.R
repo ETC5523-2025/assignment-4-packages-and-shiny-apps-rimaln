@@ -13,9 +13,20 @@ function(input, output, session) {
 
   # === UPLOAD CSV and process as main dataset ===
   user_data <- reactive({
-    req(input$csvfile)
-    read_csv(input$csvfile$datapath) |> janitor::clean_names()
+    if (!is.null(input$csvfile) && !is.null(input$csvfile$datapath)) {
+      read_csv(input$csvfile$datapath) |> janitor::clean_names()
+    } else if (!is.null(input$dataset_choice)) {
+      switch(input$dataset_choice,
+             "Combined" = read_csv("data-raw/Neon_Nitrate_Combined.csv") |> janitor::clean_names(),
+             "Site1"    = read_csv("data-raw/NEON.D13.COMO.DP1.20033.001.102.100.015.NSW_15_minute.2020-03.basic.20200704T035650Z.csv") |> janitor::clean_names(),
+             "Site2"    = read_csv("data-raw/NEON.D13.COMO.DP1.20033.001.102.100.015.NSW_15_minute.2020-04.basic.20200703T213253Z.csv") |> janitor::clean_names()
+      )
+    } else {
+      # Fallback (if nothing chosen)
+      neonNitrate::neon_nitrate
+    }
   })
+
 
   neon_nitrate <- reactive({
     user_data() |>
@@ -53,7 +64,8 @@ function(input, output, session) {
     total_obs <- pop_est() |> pull(total_obs)
     valueBox(
       value = formatC(total_obs, format = "d", big.mark = ","),
-      subtitle = "💧 Total Nitrate Observations",
+      subtitle = "Total Nitrate Observations",
+      icon = icon("tint"),              # Water drop icon (works in FA v4)
       color = "blue"
     )
   })
@@ -62,7 +74,8 @@ function(input, output, session) {
     avg_nitrate <- neon_nitrate() |> summarise(avg = mean(surf_water_nitrate_mean, na.rm = TRUE)) |> pull(avg)
     valueBox(
       value = round(avg_nitrate, 2),
-      subtitle = "⏱️ Average Nitrate (mean)",
+      subtitle = "Average Nitrate (mean)",
+      icon = icon("dashboard"),         # Speedometer/gauge (works in FA v4)
       color = "green"
     )
   })
@@ -71,10 +84,12 @@ function(input, output, session) {
     max_nitrate <- neon_nitrate() |> summarise(max = max(surf_water_nitrate_mean, na.rm = TRUE)) |> pull(max)
     valueBox(
       value = round(max_nitrate, 2),
-      subtitle = "🚨 Maximum Nitrate",
+      subtitle = "Maximum Nitrate",
+      icon = icon("warning"),           # Warning triangle (works in FA v4)
       color = "red"
     )
   })
+
 
 
   output$sample_distribution_plot <- renderPlotly({
@@ -157,6 +172,13 @@ function(input, output, session) {
       selected = sort(unique(strata_summary()$month))[1]
     )
   })
+
+  output$strata_table <- DT::renderDataTable({
+    req(input$year_select, input$month_select)
+    selected_data <- selected_strata()
+    datatable(selected_data, options = list(dom = 't', pageLength = 10), rownames = FALSE)
+  })
+
 
   selected_strata <- reactive({
     req(input$year_select, input$month_select)
