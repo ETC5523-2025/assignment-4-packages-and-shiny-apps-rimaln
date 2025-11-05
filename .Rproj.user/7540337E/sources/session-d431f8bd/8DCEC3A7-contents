@@ -114,18 +114,9 @@ ui <- dashboardPage(
               collapsible = TRUE,
               width = 12,
               HTML("
-    <p>This dataset contains surface water nitrate measurements from the NEON project.<br>
-    Data collected at 15-minute intervals with associated quality flags and statistics.</p>
-    <b>How to interpret the dashboard outputs:</b>
-    <ul>
-      <li><b>Value boxes:</b> Show summary statistics including total, mean, and maximum nitrate concentrations. High values may signal possible water contamination.</li>
-      <li><b>Sample Distribution:</b> Visualizes the frequency of each observed nitrate concentration. Look for clusters or outliers and overall spread.</li>
-      <li><b>Data Summary/Table:</b> Provides detailed statistics like minimum, maximum, mean, and quartiles. Use these to understand data range and variability.</li>
-      <li><b>Filters:</b> Change the month or year for analysis--use these to spot patterns, seasonal cycles, or anomalies.</li>
-      <li><b>Boxplots and Stratified Tables:</b> Compare nitrate readings by grouping (month/year). Wide boxes or high whiskers indicate more extreme values or variability.</li>
-    </ul>
-    <p>Use filters and interactive plots/tabs to drill down by time or location, compare trends, and identify critical periods or risks in surface water nitrate.</p>
-  ")
+                <p>This dataset contains surface water nitrate measurements from the NEON project.<br>
+                Data collected at 15-minute intervals with associated quality flags and statistics.</p>
+              ")
             )
           ),
           column(
@@ -135,14 +126,16 @@ ui <- dashboardPage(
               status = "primary",
               solidHeader = TRUE,
               width = 12,
-              plotlyOutput("sample_distribution_plot", height = "600px")
+              plotlyOutput("sample_distribution_plot", height = "600px"),
+              HTML("<b>How to interpret this plot:</b> This interactive plot shows the frequency distribution of nitrate concentration measurements. Peaks represent common levels, and outliers may indicate unusual water quality events.")
             ),
             box(
               title = "Data Summary",
               status = "info",
               solidHeader = TRUE,
               width = 12,
-              verbatimTextOutput("summary_text")
+              verbatimTextOutput("summary_text"),
+              HTML("<b>How to interpret this table:</b> Summary statistics like min, max, mean, and quartiles reveal the data range and variability, helping identify typical nitrate levels and possible anomalies.")
             )
           )
         )
@@ -181,7 +174,8 @@ ui <- dashboardPage(
               status = "primary",
               solidHeader = TRUE,
               width = NULL,
-              DTOutput("pop_est_table")
+              DTOutput("pop_est_table"),
+              HTML("<b>How to interpret this table and values:</b> This table summarizes annual and monthly nitrate concentration statistics with confidence intervals. Use value boxes to quickly see average, min, max, and total observations, helping detect trends or anomalies.")
             )
           )
         )
@@ -214,14 +208,16 @@ ui <- dashboardPage(
               status = "primary",
               solidHeader = TRUE,
               width = NULL,
-              plotlyOutput("stratified_boxplot", height = "500px")
+              plotlyOutput("stratified_boxplot", height = "500px"),
+              HTML("<b>How to interpret this plot:</b> This boxplot compares nitrate levels across selected groups. The box shows the interquartile range, whiskers extend to extremes, and outliers may indicate unusual readings.")
             ),
             box(
               title = "Stratified Data Table",
               status = "info",
               solidHeader = TRUE,
               width = NULL,
-              DTOutput("strata_table")
+              DTOutput("strata_table"),
+              HTML("<b>How to interpret this table:</b> This table provides summary statistics by group, helping identify which times or locations exhibit higher nitrate levels or variability.")
             )
           )
         )
