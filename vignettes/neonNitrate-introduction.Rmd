@@ -173,7 +173,6 @@ ggplot(neon_nitrate, aes(x = surf_water_nitrate_mean, y = surf_water_nitrate_var
 ```
 
 
-
 ## Best Practices
 
 - Use the dashboard to explore interactive plots and summary statistics.
