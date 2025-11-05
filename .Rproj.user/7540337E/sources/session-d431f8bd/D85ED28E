@@ -1,27 +1,27 @@
 {
-    "id": "60EDE36C",
-    "path": "~/Desktop/Uni/ETC-5523/Assignments/Assignment4/neonNitrate/R/data.R",
-    "project_path": "R/data.R",
+    "id": "D85ED28E",
+    "path": "~/Desktop/Uni/ETC-5523/Assignments/Assignment4/neonNitrate/inst/shiny/server.R",
+    "project_path": "inst/shiny/server.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1762308786239.0,
+    "created": 1762312393879.0,
     "source_on_save": false,
-    "relative_order": 3,
+    "relative_order": 6,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "85,0",
-        "scrollLine": "0"
+        "cursorPosition": "139,11",
+        "scrollLine": "120"
     },
     "folds": "",
-    "lastKnownWriteTime": 1762309085,
+    "lastKnownWriteTime": 1762317943,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1762309085991,
+    "last_content_update": 1762317943429,
     "read_only": false,
     "read_only_alternatives": []
 }

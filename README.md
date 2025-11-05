@@ -25,7 +25,7 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(neonNitrate)
-## basic example code
+library(shiny)
 ```
 
 What is special about using `README.Rmd` instead of just `README.md`?

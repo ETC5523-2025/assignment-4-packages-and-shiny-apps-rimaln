@@ -9,9 +9,6 @@
 #' summarise_nitrate(neon_nitrate)
 #'
 #' @export
-#'
-library(neonNitrate)
-
 summarise_nitrate <- function(data = neon_nitrate) {
   data  |>
     dplyr::summarise(
@@ -23,3 +20,4 @@ summarise_nitrate <- function(data = neon_nitrate) {
       period_end = max(end_date_time, na.rm = TRUE)
     )
 }
+

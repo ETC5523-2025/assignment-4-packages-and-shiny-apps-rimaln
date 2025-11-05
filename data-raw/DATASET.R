@@ -1,52 +1,54 @@
-## code to prepare `DATASET` dataset goes here
-
 library(readr)
 library(dplyr)
 library(janitor)
 library(stringr)
+library(lubridate)
+library(usethis)
+library(purrr)
 
-# Load your NEON nitrate data (choose the appropriate file)
-raw <- read_csv("data-raw/NEON.D13.COMO.DP1.20033.001.102.100.015.NSW_15_minute.2020-06.basic.20200704T015842Z.csv")
+# Get a vector of ALL CSVs you want to combine (change pattern if needed)
+csv_files <- list.files("data-raw", pattern = "\\.csv$", full.names = TRUE)
 
-# View the names to check correct spelling before cleaning
-print(names(raw))
+# Bind all NEON nitrate CSVs into one dataframe
+raw <- purrr::map_dfr(csv_files, read_csv)
 
-# Clean: remove rows missing nitrate mean or datetimes, clean names
-neon_nitrate <- raw  |>
-  filter(!is.na(surfWaterNitrateMean), !is.na(startDateTime))  |>
+# Clean data and create main dataset
+neon_nitrate <- raw |>
+  filter(!is.na(surfWaterNitrateMean), !is.na(startDateTime)) |>
   janitor::clean_names()
 
-# Save for package
+# Write the combined dataset to a CSV file
+write_csv(neon_nitrate, "data-raw/Neon_Nitrate_Combined.csv")
 usethis::use_data(neon_nitrate, overwrite = TRUE)
 
-
 # Distribution of nitrate measurements
-nitrate_sample_distribution <- neon_nitrate  |>
-  count(surf_water_nitrate_mean)  |>
+nitrate_sample_distribution <- neon_nitrate |>
+  count(surf_water_nitrate_mean) |>
   arrange(desc(n))
 
-# Stratified summary: by month and year (add others as needed)
-neon_nitrate <- neon_nitrate  |>
-  mutate(month = lubridate::month(start_date_time),
-         year = lubridate::year(start_date_time))
+usethis::use_data(nitrate_sample_distribution, overwrite = TRUE)
 
-strata_summary <- neon_nitrate  |>
-  group_by(year, month)  |>
+# Stratified summary: add month and year
+neon_nitrate <- neon_nitrate |>
+  mutate(
+    month = lubridate::month(start_date_time),
+    year = lubridate::year(start_date_time)
+  )
+
+strata_summary <- neon_nitrate |>
+  group_by(year, month) |>
   summarise(
     mean_nitrate = mean(surf_water_nitrate_mean, na.rm = TRUE),
     min_nitrate = min(surf_water_nitrate_mean, na.rm = TRUE),
     max_nitrate = max(surf_water_nitrate_mean, na.rm = TRUE),
-    n = n()
+    n = n(),
+    .groups = "drop"
   )
 
-# Population estimate (total observation count as surrogate)
-pop_est <- neon_nitrate  |>
+usethis::use_data(strata_summary, overwrite = TRUE)
+
+# Population estimate (total observation count)
+pop_est <- neon_nitrate |>
   summarise(total_obs = n())
 
-usethis::use_data(
-  neon_nitrate,
-  nitrate_sample_distribution,
-  strata_summary,
-  pop_est,
-  overwrite = TRUE
-)
+usethis::use_data(pop_est, overwrite = TRUE)
