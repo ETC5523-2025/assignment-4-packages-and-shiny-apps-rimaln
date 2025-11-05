@@ -100,7 +100,7 @@ head(strata_summary)
 
 To launch the interactive Shiny dashboard:
 
-```{r}
+```{r, eval = FALSE}
 run_app()
 ```
 
@@ -110,15 +110,22 @@ run_app()
 ## Basic Data Visualization
 
 ### Count of Samples by Site
-```{r}
-ggplot(nitrate_sample_distribution, aes(x = site, y = n_samples)) +
-geom_col(fill = "#009E73") +
-labs(
-title = "Samples Collected per NEON Site",
-x = "Site",
-y = "Sample Count"
-) +
-theme_minimal()
+```{r message = FALSE, warning = FALSE}
+library(ggplot2)
+library(dplyr)
+
+data("nitrate_sample_distribution", package = "neonNitrate")
+
+ggplot(nitrate_sample_distribution, aes(x = surf_water_nitrate_mean, y = n)) +
+  geom_col(fill = "#009E73") +
+  labs(
+    title = "Samples Collected per Nitrate Concentration",
+    x = "Mean Surface Water Nitrate (mg/L)",
+    y = "Number of Samples"
+  ) +
+  theme_minimal()
+
+
 ```
 
 
@@ -127,26 +134,41 @@ theme_minimal()
 
 ```{r}
 library(dplyr)
+library(ggplot2)
+library(neonNitrate)
 
-neon_nitrate  |> 
-group_by(site)  |> 
-summarise(median_nitrate = median(nitrate_concentration, na.rm=TRUE)) %>%
-arrange(desc(median_nitrate))
+data("neon_nitrate", package = "neonNitrate")
+
+# Convert start_date_time to Date
+neon_nitrate <- neon_nitrate %>%
+  mutate(start_date_time = as.Date(start_date_time))
+
+# Time series plot of mean nitrate
+ggplot(neon_nitrate, aes(x = start_date_time, y = surf_water_nitrate_mean)) +
+  geom_line(group = 1, color = "#0072B2") +
+  geom_point(alpha = 0.5, color = "#D55E00") +
+  labs(
+    title = "Temporal Patterns of Surface Water Nitrate",
+    x = "Date",
+    y = "Mean Surface Water Nitrate (mg/L)"
+  ) +
+  theme_minimal()
+
 
 ```
 
 
-### Time Series Plot
+### Plot of Nitrate Variability (Variance)
 
 ```{r}
-ggplot(neon_nitrate, 
-aes(x = date, 
-y = nitrate_concentration,
-color = site)) +
-geom_line() +
-labs(title = "Temporal Patterns in Nitrate Concentration",
-x = "Date", y = "Nitrate (mg/L)") +
-theme_minimal()
+ggplot(neon_nitrate, aes(x = surf_water_nitrate_mean, y = surf_water_nitrate_variance)) +
+  geom_point(alpha = 0.6, color = "#E69F00") +
+  labs(
+    title = "Relationship Between Mean and Variance of Nitrate Measurements",
+    x = "Mean Surface Water Nitrate (mg/L)",
+    y = "Variance of Nitrate Measurements"
+  ) +
+  theme_minimal()
 
 ```
 

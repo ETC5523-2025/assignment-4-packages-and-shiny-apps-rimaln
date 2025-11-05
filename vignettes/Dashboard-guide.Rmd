@@ -1,0 +1,291 @@
+---
+title: "neonNitrate Dashboard User Guide"
+author: "Rimlan Lora Alva"
+date: "5 November 2025"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{neonNitrate Dashboard User Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+## Introduction
+
+The **neonNitrate** dashboard provides a powerful, interactive environment for exploring nitrate concentrations measured in German surface water sites as part of the NEON project. This guide walks you through key features, interpretation tips, and usage best practices.
+
+## Launching the Dashboard
+
+Load the package and run:
+
+```{r eval = FALSE}
+library(neonNitrate)
+
+# Launch with default settings
+run_app()
+
+# Launch without auto-opening browser
+run_app(launch.browser = FALSE)
+
+```
+
+If the dashboard does not open automatically, check the R console for the local URL and paste it into your browser.
+
+## Dashboard Overview
+
+The app includes three main tabs accessible via the sidebar:
+
+1. **Data Overview** – Snapshot of nitrate sample distribution and site metadata
+
+2. **Temporal Trends** – Time series visualizations and monthly summaries per site
+
+3. **Summary & Analysis**– Statistical summaries, cross-site comparisons, and export options.
+
+---
+
+## Tab 1: Overview
+
+### Purpose
+
+The Overview tab presents sample distribution data from the neonNitrate datasets, showing:
+
+- How many nitrate samples were collected at each site
+- The distribution of sampling efforts across German NEON sites
+- Summary statistics to understand sampling coverage and data completeness
+
+### Key Features
+
+#### Value Boxes
+
+Three summary statistics provide a quick overview:
+
+- **Total Sites Surveyed**: Number of unique NEON sampling sites surveyed
+- **Total Samples Collected**: Total nitrate samples in the dataset
+- **Date Range Covered**: Time span of the nitrate measurements
+
+These provide a high-level summary of your dataset’s scope.
+
+#### Information Boxes
+
+Two collapsible panels provide essential background:
+
+- **About neonNitrate Data**: Explains the nature of NEON nitrate sampling and use cases
+- **Understanding the Data Fields**: Definitions for site, sample count, nitrate concentration, and date variables
+
+Expand these if you are new to NEON nitrate data or need guidance on field meaning.
+
+#### Interactive Sample Distribution Plot
+
+The main visualization presents the spatial and numerical distribution of nitrate samples:
+
+**Structure:**
+
+- Bar chart showing sample counts per site
+- Optional tables summarizing site metadata and sampling effort
+
+**How to interact:**
+
+- Hover over bars to see exact sample counts
+- Use filtering or search (if available) to focus on specific sites
+- Compare sample counts between sites to identify data density hotspots
+
+#### What to Look For
+
+- **Sampling Imbalance**: Some sites may have many samples, others few or none
+- **Temporal Coverage**: Confirm if sites have consistent sampling over time
+- **Potential Gaps**: Identify sites needing further data collection or review
+
+### Interpretation Tips
+
+1. **Sample Concentration**: Heavily sampled sites provide more reliable data for analysis
+
+2. **Site Coverage**: Broader site coverage supports generalizability of findings
+
+3. **Data Quality Checks**: Use overview insights to guide cleaning and quality control efforts
+
+---
+
+## Tab 2: Temporal Trends
+
+### Purpose
+
+This tab shows time series visualizations and summaries of nitrate concentrations to reveal temporal patterns at different NEON sites.
+
+### Key Features
+
+#### Summary Value Boxes
+
+Three key statistics provide a snapshot overview:
+
+- **Total Measurement Dates**: Number of distinct sampling dates in the dataset
+- **Date Range**: Earliest to latest measurement date
+- **Total Sites with Data**: Count of sites with available nitrate measurements
+
+These help you grasp the temporal and spatial coverage of the nitrate data.
+
+#### Control Panel
+
+- **Site Selector**: Choose one or multiple sampling sites to focus on
+- **Date Range Slider**: Narrow the displayed period for targeted analysis
+
+#### Main Visualizations
+
+- **Interactive Time Series Plot**:  
+  Line plot showing nitrate concentration over time for selected sites  
+  - Hover for exact value and date  
+  - Toggle site visibility via legend  
+
+- **Monthly Summary Plot**:  
+  Boxplot or bar chart summarizing median or range of nitrate concentrations by month and site, showing seasonal trends
+
+#### Data Table
+
+Complementary table showing date, site, and nitrate concentration for filtered data, with search and sort functionality.
+
+### How to Use
+
+- Use the site selector to compare trends across different locations
+- Zoom or filter by date for seasonal or event-focused analysis
+- Hover on the plot lines to examine specific measurement details
+- Export plots or tables for further reporting
+
+### Interpretation Tips
+
+1. **Seasonality Detection**: Look for recurring patterns or spikes in nitrate associated with seasons or events
+2. **Site Comparisons**: Recognize differences in temporal trends between urban, agricultural, or reference sites
+3. **Anomaly Identification**: Detect unusual concentration changes indicating pollution or sampling errors
+4. **Data Gaps**: Use the date range to spot periods with limited or no data for targeted follow-up
+
+---
+
+## Tab 3: Summary & Analysis
+
+### Purpose
+
+This tab provides aggregated statistical summaries and visual comparisons of nitrate levels across sites and time, supporting deeper insights.
+
+### Key Features
+
+#### Summary Statistics Table
+
+- Displays mean, median, standard deviation, min, max nitrate concentrations grouped by site or time periods.
+- Sortable and searchable interface for easy data exploration.
+- Allows exporting summaries for reporting.
+
+#### Comparative Distribution Plots
+
+- Boxplots and violin plots contrasting nitrate concentration distributions between sites or over chosen periods.
+- Color-coded by site for visual clarity.
+- Helps detect outliers, skewness, and variation.
+
+#### Filters and Controls
+
+- Select grouping variables such as site, month, or year.
+- Choose nitrate measurement range for focused analysis.
+
+### How to Use
+
+- Examine the summary statistics to identify sites with high median or variability.
+- Visualize distributions to detect irregularities or site-specific characteristics.
+- Filter data to zoom in on critical periods or locations.
+- Export tables and plots for presentation or further analysis.
+
+### Interpretation Tips
+
+1. **Identify Hotspots**: Sites with consistently elevated nitrate levels may require targeted investigation.
+2. **Seasonal Effects**: Changes in distribution shapes across months can indicate seasonal pollution sources.
+3. **Data Spread**: Wide variation or outliers suggest complex site conditions or measurement issues.
+4. **Comparative Insights**: Use side-by-side plots to compare sites or periods meaningfully.
+
+---
+
+## General Dashboard Features
+
+### Navigation
+
+- **Sidebar menu**: Easily switch between the main pages: Data Overview, Temporal Trends, and Summary & Analysis.
+- **Current tab highlight**: The selected tab is visually marked to help orientation.
+- **Collapsible content sections**: Click headings to expand or minimize explanatory or control panels.
+- **Breadcrumb navigation**: Available in hierarchical views to quickly backtrack and navigate levels.
+
+### Interactivity
+
+- **Hover info**: Mouse over interactive plots for detailed data readouts.
+- **Click actions**: Select or drill down by clicking on specific plot elements.
+- **Zoom and pan**: Use built-in tools to adjust plot views dynamically.
+- **Export options**: Save charts as images and download data tables in CSV format for offline analysis.
+
+### Performance Guidelines
+
+1. Use up-to-date browsers like Chrome, Firefox, Safari, or Edge for the best rendering and responsiveness.
+2. Close unused browser tabs and applications to free up memory and processing power.
+3. Minimize selection complexity—limit filters (e.g., site selection) to 2 or 3 items for smoother operation.
+4. Be patient; rendering complex plots or large datasets can take a few moments to complete.
+
+---
+
+## Common Questions
+
+### Why do some nitrate measurements show wide variability or uncertainty?
+
+- Sample sizes may be smaller on certain dates or sites, especially in infrequent sampling periods.
+- Natural variability in nitrate levels due to environmental factors (rainfall, agriculture, seasonality).
+- Measurement or sensor errors can add uncertainty, especially for extreme values.
+- Such variability highlights areas where more data collection or quality checks could improve reliability.
+
+### What does the "Overall" summary represent?
+
+- The "Overall" summary aggregates nitrate measurements across all sites and times within the specified filters.
+- It is not a separate site but a combined estimate to provide a big-picture perspective.
+
+### Can I export the data and visuals?
+
+- Yes! Use the dashboard’s download buttons to save data tables as CSV files.
+- Save any plotted graph as a PNG image using the camera icon on the plot toolbar.
+
+
+## Best Practices for Dashboard Use
+
+### 1. Explore Broadly Before Zooming In
+
+- Start with the Data Overview to assess sampling coverage.
+- Investigate temporal trends to identify seasonal or event-driven changes.
+- Use summarized statistics and plots to focus on critical sites or time periods.
+
+### 2. Consider Measurement Variability
+
+- Pay attention to confidence intervals or error bars where available.
+- Larger variability suggests caution in interpretation or need for more data.
+- Narrow variability suggests more reliable estimates.
+
+### 3. Compare Within Context
+
+- Use per-site or time-based comparisons rather than global averages.
+- Consider local land use, weather, or management when interpreting differences.
+- Avoid over-interpreting small variations without contextual knowledge.
+
+### 4. Combine Statistical and Practical Insight
+
+- Statistical significance may not always imply environmental or regulatory importance.
+- Consider whether observed changes matter for management or policy.
+- Prioritize actionable findings.
+
+### 5. Document Your Analysis
+
+- Record observations and interesting patterns.
+- Save visualizations and data extracts for reproducibility.
+- Note filtering and parameters used for clarity.
+
+### 6. Cross-Validate Findings
+
+- Check consistency across tabs and metrics.
+- Use multiple plots and summaries to confirm trends.
+- Seek confirmation with external data or expert knowledge when possible.
