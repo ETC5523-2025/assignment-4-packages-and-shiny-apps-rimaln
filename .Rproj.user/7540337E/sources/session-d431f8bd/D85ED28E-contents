@@ -53,8 +53,7 @@ function(input, output, session) {
     total_obs <- pop_est() |> pull(total_obs)
     valueBox(
       value = formatC(total_obs, format = "d", big.mark = ","),
-      subtitle = "Total Nitrate Observations",
-      icon = icon("tint"),
+      subtitle = "💧 Total Nitrate Observations",
       color = "blue"
     )
   })
@@ -63,8 +62,7 @@ function(input, output, session) {
     avg_nitrate <- neon_nitrate() |> summarise(avg = mean(surf_water_nitrate_mean, na.rm = TRUE)) |> pull(avg)
     valueBox(
       value = round(avg_nitrate, 2),
-      subtitle = "Average Nitrate (mean)",
-      icon = icon("tachometer-alt"),
+      subtitle = "⏱️ Average Nitrate (mean)",
       color = "green"
     )
   })
@@ -73,11 +71,11 @@ function(input, output, session) {
     max_nitrate <- neon_nitrate() |> summarise(max = max(surf_water_nitrate_mean, na.rm = TRUE)) |> pull(max)
     valueBox(
       value = round(max_nitrate, 2),
-      subtitle = "Maximum Nitrate",
-      icon = icon("exclamation-triangle"),
+      subtitle = "🚨 Maximum Nitrate",
       color = "red"
     )
   })
+
 
   output$sample_distribution_plot <- renderPlotly({
     dist <- nitrate_sample_distribution()
@@ -109,8 +107,9 @@ function(input, output, session) {
   })
 
   # ========= TAB 2: Population Estimates =========
+  # ===== TAB 2: Population Estimates =====
 
-  # Update filter dropdowns for available years and months
+  # Update month/year filter options every time the underlying data changes
   observe({
     updateSelectInput(session, "month_filter",
                       choices = sort(unique(neon_nitrate()$month)),
@@ -122,7 +121,7 @@ function(input, output, session) {
     )
   })
 
-  # Render summary table without export/search options
+  # Show summary table—no CSV/Copy/search bar
   output$pop_est_table <- DT::renderDataTable({
     data <- neon_nitrate()
     if (!is.null(input$month_filter) && input$month_filter != "") {
@@ -131,18 +130,19 @@ function(input, output, session) {
     if (!is.null(input$year_filter) && input$year_filter != "") {
       data <- data %>% filter(year == input$year_filter)
     }
-    data |>
+    data %>%
       summarise(
         total_obs = n(),
         mean_nitrate = round(mean(surf_water_nitrate_mean, na.rm = TRUE), 2),
         min_nitrate = round(min(surf_water_nitrate_mean, na.rm = TRUE), 2),
         max_nitrate = round(max(surf_water_nitrate_mean, na.rm = TRUE), 2)
-      )  |>
+      ) %>%
       datatable(
-        options = list(dom = 't', pageLength = 10),  # dom = 't' suppresses all search/control buttons
+        options = list(dom = 't', pageLength = 10), # 't' = only table, no controls/search/buttons
         rownames = FALSE
       )
   })
+
 
   # ========= TAB 3: Stratified Analysis =========
   observeEvent(strata_summary(), {
@@ -161,12 +161,6 @@ function(input, output, session) {
   selected_strata <- reactive({
     req(input$year_select, input$month_select)
     filter(strata_summary(), year == input$year_select, month == input$month_select)
-  })
-
-  output$strata_table <- DT::renderDataTable({
-    req(input$year_select)
-    filtered <- strata_summary() %>% filter(year == input$year_select)
-    datatable(filtered, options = list(pageLength = 10, dom = 'tip'), rownames = FALSE)
   })
 
   output$stratified_boxplot <- renderPlotly({

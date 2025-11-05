@@ -28,39 +28,78 @@ ui <- dashboardPage(
       menuItem("Population Estimates", tabName = "estimates", icon = icon("project-diagram")),
       menuItem("Stratified Analysis", tabName = "stratified", icon = icon("chart-bar"))
     )
-  )
-,
-dashboardBody(
-  tags$head(
-    tags$style(HTML("
-      /* Custom style for all box titles */
-      .box .box-title {
-        font-size: 1.3em !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.1em;
-        color: #4527a0 !important;
-        font-family: 'Montserrat', 'Arial', sans-serif;
-        border-left: 6px solid #7e57c2 !important;
-        padding-left: 12px;
-        margin-bottom: 0.2em;
-      }
-      .box-primary, .box-info {
-        border-radius: 10px;
-        border: none;
-      }
-      /* Add shadow for lifted look */
-      .box {
-        box-shadow: 0 2px 8px rgba(30,30,60,0.06) !important;
-      }
-      /* Optional: Light highlight on box background for extra clarity */
-      .box.box-primary {
-         background: #f6f3fc;
-       }
-      .box.box-info {
-         background: #e3f2fd;
-       }
-    "))
   ),
+  dashboardBody(
+    tags$head(
+      tags$style(HTML("
+        /* Custom style for all box titles */
+        .box .box-title {
+          font-size: 1.3em !important;
+          font-weight: 700 !important;
+          letter-spacing: 0.1em;
+          color: #4527a0 !important;
+          font-family: 'Montserrat', 'Arial', sans-serif;
+          border-left: 6px solid #7e57c2 !important;
+          padding-left: 12px;
+          margin-bottom: 0.2em;
+        }
+        .box-primary, .box-info {
+          border-radius: 10px;
+          border: none;
+        }
+        /* Add shadow for lifted look */
+        .box {
+          box-shadow: 0 2px 8px rgba(30,30,60,0.06) !important;
+        }
+        .box.box-primary {
+           background: #f6f3fc;
+        }
+        .box.box-info {
+           background: #e3f2fd;
+        }
+        /* Custom valueBox colors and style */
+        .small-box.bg-blue {
+          background: linear-gradient(120deg, #2491c5 60%, #3989dd 100%);
+          color: #fff !important;
+          box-shadow: 0 4px 20px rgba(36, 145, 197, 0.13);
+          border-radius: 18px !important;
+          border: none !important;
+        }
+        .small-box.bg-green {
+          background: linear-gradient(120deg, #20b37f 60%, #224d36 100%);
+          color: #fff !important;
+          box-shadow: 0 4px 20px rgba(32,179,127, 0.17);
+          border-radius: 18px !important;
+          border: none !important;
+        }
+        .small-box.bg-red {
+          background: linear-gradient(120deg, #ec625c 60%, #a73327 100%);
+          color: #fff !important;
+          box-shadow: 0 4px 20px rgba(236, 98, 92, 0.15);
+          border-radius: 18px !important;
+          border: none !important;
+        }
+        /* ValueBox font tweaks */
+        .small-box .inner h3 {
+          font-size: 2.9em !important;
+          font-weight: 900 !important;
+          margin-bottom: 0.10em;
+          letter-spacing: 1px;
+        }
+        .small-box .inner p {
+          font-size: 1.22em !important;
+          margin-top: 0.30em;
+          color: #f5f5f5 !important;
+        }
+        /* Subtle icon watermark effect */
+        .small-box i {
+          opacity: 0.13 !important;
+          font-size: 4em !important;
+          right: 15px;
+          top: 15px;
+        }
+      "))
+    ),
     tabItems(
       # TAB 1: Overview
       tabItem(
