@@ -4,11 +4,9 @@
 #' Opens the interactive dashboard for visualizing NEON nitrate data.
 #'
 #' @export
-#' 
-library(neonNitrate)
-
 run_dashboard <- function() {
   app_dir <- system.file("app", package = "neonNitrate")
   shiny::runApp(app_dir, display.mode = "normal")
 }
+
 
