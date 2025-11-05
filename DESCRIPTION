@@ -1,21 +1,40 @@
 Package: neonNitrate
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
+Title: Interactive Dashboard for Surface Water Nitrate Data Analysis in Germany
+Version: 1.0.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Rimlan", "Lora", "Alva"
+      email = "jralv0004@student.monash.edu",
       role = c("aut", "cre")
+    ),
+    person(
+      "John", "Smith",
+      email = "john@example.com",
+      role = c("aut")
     )
-  )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+)
+Description: Provides interactive tools and visualizations for exploring surface water nitrate concentrations from the NEON project across German monitoring sites. Includes real-time dashboards, summary statistics, population burden estimates, and stratified analysis features for research and educational use. Designed to support flexible data upload and filtering, with professional-grade plots, tables, and output interpretation.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
-Depends: 
-    R (>= 3.5)
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Imports: 
-    bslib
+Imports:
+    shiny,
+    shinydashboard,
+    neonNitrate,
+    DT,
+    plotly,
+    tibble,
+    dplyr,
+    tidyr
+Depends:
+    R (>= 4.0)
+LazyData: true
+Suggests:
+    ggplot2,
+    rmarkdown,
+    knitr,
+    bslib,
+    scales
+VignetteBuilder: knitr
+URL: https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-rimaln.git
