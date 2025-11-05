@@ -7,9 +7,9 @@
 \format{
 A data frame:
 \describe{
-  \item{total_obs}{Total number of cleaned observations}
-  \item{start_range}{Earliest sample time}
-  \item{end_range}{Latest sample time}
+\item{total_obs}{Total number of cleaned observations}
+\item{start_range}{Earliest sample time}
+\item{end_range}{Latest sample time}
 }
 }
 \usage{

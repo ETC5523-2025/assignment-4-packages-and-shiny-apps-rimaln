@@ -7,8 +7,8 @@
 \format{
 A data frame:
 \describe{
-  \item{surf_water_nitrate_mean}{Mean nitrate value (mg/L)}
-  \item{n}{Number of samples with that mean value}
+\item{surf_water_nitrate_mean}{Mean nitrate value (mg/L)}
+\item{n}{Number of samples with that mean value}
 }
 }
 \usage{

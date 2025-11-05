@@ -1,0 +1,23 @@
+#' Summarize NEON Nitrate Data
+#'
+#' @description
+#' Returns quick summary statistics and coverage for the nitrate dataset.
+#'
+#' @param data The cleaned NEON nitrate tibble (default: neon_nitrate).
+#' @return A tibble; summary table of core statistics.
+#' @examples
+#' summarise_nitrate(neon_nitrate)
+#'
+#' @export
+summarise_nitrate <- function(data = neon_nitrate) {
+  data  |>
+    dplyr::summarise(
+      n_obs = dplyr::n(),
+      avg_nitrate = mean(surf_water_nitrate_mean, na.rm = TRUE),
+      min_nitrate = min(surf_water_nitrate_minimum, na.rm = TRUE),
+      max_nitrate = max(surf_water_nitrate_maximum, na.rm = TRUE),
+      period_start = min(start_date_time, na.rm = TRUE),
+      period_end = max(end_date_time, na.rm = TRUE)
+    )
+}
+

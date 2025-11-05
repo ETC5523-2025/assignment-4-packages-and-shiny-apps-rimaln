@@ -7,16 +7,16 @@
 \format{
 A data frame with one row per 15-minute sample:
 \describe{
-  \item{start_date_time}{Start time of sample (POSIXct)}
-  \item{end_date_time}{End time of sample (POSIXct)}
-  \item{surf_water_nitrate_mean}{Mean water nitrate concentration (mg/L)}
-  \item{surf_water_nitrate_minimum}{Minimum nitrate concentration (mg/L)}
-  \item{surf_water_nitrate_maximum}{Maximum nitrate concentration (mg/L)}
-  \item{surf_water_nitrate_variance}{Variance of nitrate values}
-  \item{surf_water_nitrate_num_pts}{Number of measurements in interval}
-  \item{surf_water_nitrate_exp_uncert}{Experimental uncertainty}
-  \item{surf_water_nitrate_std_er_mean}{Standard error of mean}
-  \item{final_qf}{Quality flag}
+\item{start_date_time}{Start time of sample (POSIXct)}
+\item{end_date_time}{End time of sample (POSIXct)}
+\item{surf_water_nitrate_mean}{Mean water nitrate concentration (mg/L)}
+\item{surf_water_nitrate_minimum}{Minimum nitrate concentration (mg/L)}
+\item{surf_water_nitrate_maximum}{Maximum nitrate concentration (mg/L)}
+\item{surf_water_nitrate_variance}{Variance of nitrate values}
+\item{surf_water_nitrate_num_pts}{Number of measurements in interval}
+\item{surf_water_nitrate_exp_uncert}{Experimental uncertainty}
+\item{surf_water_nitrate_std_er_mean}{Standard error of mean}
+\item{final_qf}{Quality flag}
 }
 }
 \source{
@@ -37,6 +37,6 @@ summary(neon_nitrate$surf_water_nitrate_mean)
 head(neon_nitrate)
 }
 \seealso{
-[nitrate_sample_distribution], [strata_summary], [pop_est]
+\link{nitrate_sample_distribution}, \link{strata_summary}, \link{pop_est}
 }
 \keyword{datasets}

@@ -7,12 +7,12 @@
 \format{
 A data frame:
 \describe{
-  \item{year}{Year}
-  \item{month}{Month}
-  \item{mean_nitrate}{Mean concentration}
-  \item{min_nitrate}{Minimum concentration}
-  \item{max_nitrate}{Maximum concentration}
-  \item{n}{Sample count}
+\item{year}{Year}
+\item{month}{Month}
+\item{mean_nitrate}{Mean concentration}
+\item{min_nitrate}{Minimum concentration}
+\item{max_nitrate}{Maximum concentration}
+\item{n}{Sample count}
 }
 }
 \usage{

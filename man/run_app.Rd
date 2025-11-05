@@ -10,9 +10,9 @@ run_app(...)
 \item{...}{Additional arguments passed to \code{\link[shiny]{runApp}}.
 Common options include:
 \itemize{
-  \item \code{port}: Port number (e.g., \code{port = 3838})
-  \item \code{launch.browser}: Logical; open app in browser (default: \code{TRUE})
-  \item \code{host}: Host IP address (default: \code{"127.0.0.1"})
+\item \code{port}: Port number (e.g., \code{port = 3838})
+\item \code{launch.browser}: Logical; open app in browser (default: \code{TRUE})
+\item \code{host}: Host IP address (default: \code{"127.0.0.1"})
 }}
 }
 \value{
@@ -22,8 +22,8 @@ Launches the Shiny application; no return value.
 Launches an interactive Shiny dashboard for exploring the NEON nitrate dataset.
 The dashboard includes visualizations and summaries such as:
 \itemize{
-  \item Sample distributions with interactive plots
-  \item Time series and monthly summaries
-  \item Data filtering and quality control visualizations
+\item Sample distributions with interactive plots
+\item Time series and monthly summaries
+\item Data filtering and quality control visualizations
 }
 }
